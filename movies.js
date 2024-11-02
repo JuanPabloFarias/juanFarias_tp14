@@ -32,12 +32,44 @@ console.log(peliculas);
 // .toUpperCase(). Con ese valor recibido, deberás colocarla primero en la
 // estructura creada.
 
+function peliculaPrimeroYEnMayusculas(nombrePelicula, lista){
+    let arregloTemporal = [];
+    arregloTemporal = lista.split(",");
+    let nuevoArreglo = [];
+    let temp = "" //variable donde se llenaran de letras una por una en el bucle de abajo
 
-function peliculaEnMayusculas(nombrePelicula){
-    peliculas = peliculas.replace(nombrePelicula, nombrePelicula.toUpperCase())
+    for (let j = 1; j < arregloTemporal[0].length-1; j++){ //bucle aplicado unicamente al primer elemento, ya que el primer elemento no tiene una 'coma' ni un espacio en blanco
+        temp += arregloTemporal[0][j];
+    }
+    nuevoArreglo.push(temp)
+
+    for (let i = 1; i < arregloTemporal.length; i++) {
+        temp = ""
+    for (let j = 2; j < arregloTemporal[i].length-1; j++){
+        temp += arregloTemporal[i][j];
+    }
+        nuevoArreglo.push(temp)
+    }
+
+
+    for (let i = 0; i < nuevoArreglo.length; i++) { //bucle para buscar y borrar la pelicula indicada
+        if(nuevoArreglo[i] == nombrePelicula){
+            nuevoArreglo.splice(i, 1)
+        }
+    }
+
+    lista = "" //la nueva lista de peliculas
+    nombrePelicula = nombrePelicula.toUpperCase()
+    lista = agregarPeliculas(lista, nombrePelicula); //agrega la primer pelicula que se indica como parametro
+
+    for (let i = 0; i < nuevoArreglo.length; i++) { //agregamos a la nueva lista todos los elementos del arreglo con este bucle
+        lista = agregarPeliculas(lista, nuevoArreglo[i]);
+    }
+
+    return lista;
 }
 
-peliculaEnMayusculas("Thor: amor y trueno")
+peliculas = peliculaPrimeroYEnMayusculas("Thor: amor y trueno", peliculas)
 console.log("Consigna 3: ")
 console.log(peliculas)
 
